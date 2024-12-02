@@ -1,11 +1,13 @@
 import React from "react";
+import styles from "./ModeButton.module.css";
 
-const ModeButton = ({ isDarkMode, toggleMode }) => {
+const ModeButton = ({ isDarkMode, onToggle }) => {
   return (
     <button
-      id="modeButton"
-      onClick={toggleMode}
-      className={isDarkMode ? "" : "light-mode"}
+      className={`${styles.modeButton} ${
+        isDarkMode ? styles.darkMode : styles.lightMode
+      }`}
+      onClick={onToggle}
     >
       {isDarkMode ? "☾" : "☀"}
     </button>

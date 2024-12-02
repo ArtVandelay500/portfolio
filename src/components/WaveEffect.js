@@ -87,7 +87,7 @@ const WaveEffect = ({ isDarkMode }) => {
           float wave = wave1 + wave2 * 0.8 + wave3 * 0.6;
           float intensity = smoothstep(0.3, 0.4, abs(wave));
 
-          vec3 darkColor = vec3(0.08, 0.08, 0.12);
+          vec3 darkColor = vec3(0.08, 0.08, 0.09);
           vec3 lightColor = mix(vec3(0.83, 0.82, 0.81), vec3(0.88, 0.87, 0.86), intensity);
 
           float intensityModifier = mix(1.0, 0.5, u_colorInvert);
@@ -108,7 +108,7 @@ const WaveEffect = ({ isDarkMode }) => {
     scene.add(mesh);
 
     const animate = (time) => {
-      uniforms.u_time.value = time * 0.001;
+      uniforms.u_time.value = time * 0.0008;
       renderer.render(scene, camera);
       animationFrameId.current = requestAnimationFrame(animate);
     };
