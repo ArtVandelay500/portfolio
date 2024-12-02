@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import WaveEffect from "./components/WaveEffect";
 
-function App() {
+const App = () => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  const toggleMode = () => setIsDarkMode((prev) => !prev);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button
+        id="modeButton"
+        onClick={toggleMode}
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          width: "40px",
+          height: "40px",
+          backgroundColor: isDarkMode ? "#444" : "#fff",
+          color: isDarkMode ? "#fff" : "#444",
+          border: "none",
+          borderRadius: "50%",
+          cursor: "pointer",
+        }}
+      >
+        {isDarkMode ? "☾" : "☀"}
+      </button>
+      <WaveEffect isDarkMode={isDarkMode} />
     </div>
   );
-}
+};
 
 export default App;
