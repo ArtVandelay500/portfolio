@@ -6,10 +6,9 @@ const WaveEffect = ({ isDarkMode }) => {
   const animationFrameId = useRef(null);
   const materialRef = useRef(null);
   const transitionFrameId = useRef(null);
-  const isDarkModeRef = useRef(isDarkMode); // Track `isDarkMode` using a ref
+  const isDarkModeRef = useRef(isDarkMode);
 
   useEffect(() => {
-    // Initialize Three.js components
     const canvas = canvasRef.current;
     const renderer = new THREE.WebGLRenderer({ canvas });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -62,41 +61,54 @@ const WaveEffect = ({ isDarkMode }) => {
           return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
         }
 
-        void main() {
-          vec2 st = gl_FragCoord.xy / u_resolution;
-
-          float noiseIntensity = mix(0.01, 0.005, u_colorInvert);
-          float noiseScale = 3.5;
-
-          vec2 noiseOffset = vec2(
-            noise(st * noiseScale + u_time * 0.1) * noiseIntensity,
-            noise(st * noiseScale + u_time * 0.15 + 10.0) * noiseIntensity
-          );
-
-          vec2 smudgedCoords = st + noiseOffset;
-
-          float wave1 = sin((smudgedCoords.x * (2.5 + sin(u_time * 0.15) * 1.2) + u_time * 0.6) + random(smudgedCoords) * 3.14) * 
-                        cos((smudgedCoords.y * (12.0 + cos(u_time * 0.2) * 1.3) - u_time * 0.5) + random(smudgedCoords) * 3.14) * 0.9;
-
-          float wave2 = sin((smudgedCoords.x * (10.0 + cos(u_time * 0.12) * 1.5) - u_time * 0.9) + random(smudgedCoords) * 3.14) * 
-                        cos((smudgedCoords.y * (16.0 + sin(u_time * 0.1) * 1.6) + u_time * 0.8) + random(smudgedCoords) * 3.14) * 0.7;
-
-          float wave3 = sin((smudgedCoords.x * (8.0 + sin(u_time * 0.1) * 2.0) + u_time * 5.2) + random(smudgedCoords) * 3.14) * 
-                        cos((smudgedCoords.y * (5.0 + cos(u_time * 0.12) * 1.8) - u_time * 1.3) + random(smudgedCoords) * 3.14) * 0.5;
-
-          float wave = wave1 + wave2 * 0.8 + wave3 * 0.6;
-          float intensity = smoothstep(0.3, 0.4, abs(wave));
-
-          vec3 darkColor = vec3(0.08, 0.08, 0.09);
-          vec3 lightColor = mix(vec3(0.83, 0.82, 0.81), vec3(0.88, 0.87, 0.86), intensity);
-
-          float intensityModifier = mix(1.0, 0.5, u_colorInvert);
-          float blendFactor = mix(0.5, 0.001, u_colorInvert);
-          vec3 baseColor = mix(darkColor, lightColor, u_colorInvert);
-          vec3 finalColor = mix(baseColor, vec3(0.0), intensity * blendFactor * intensityModifier);
-
-          gl_FragColor = vec4(finalColor, 1.0);
+        float fbm(vec2 st) {
+          float value = 0.0;
+          float amplitude = 0.5;
+          vec2 shift = vec2(100.0);
+          vec2 offset = vec2(0.0);
+          for (int i = 0; i < 5; i++) {
+            value += amplitude * noise(st);
+            st = st * 2.0 + shift;
+            amplitude *= 0.5;
+          }
+          return value;
         }
+
+         void main() {
+          vec2 st = gl_FragCoord.xy / u_resolution.xy;
+          st.x *= u_resolution.x / u_resolution.y;
+
+          // Base noise flow
+          vec2 q = vec2(0.0);
+          q.x = fbm(st + u_time * 0.009);
+          q.y = fbm(st + u_time * 0.007);
+
+          // Displacement
+          vec2 r = vec2(0.0);
+          r.x = fbm(st + q + u_time * 0.1);
+          r.y = fbm(st + q + u_time * 0.1);
+
+          // Final noise
+          float f = fbm(st + r);
+
+          // Contemporary gradient-based color palette
+    vec3 colorA = vec3(0.0, 0.65, 0.65); // Teal
+  vec3 colorB = vec3(1.0, 0.95, 0.85); // Cream
+  vec3 colorC = vec3(0.05, 0.05, 0.2); // Deep Navy Blue
+  vec3 colorD = vec3(0.93, 0.49, 0.47); // Soft Coral
+
+          // Interpolate colors based on noise
+          vec3 color = mix(colorA, colorB, smoothstep(0.0, 0.5, f));
+          color = mix(color, colorC, smoothstep(0.3, 0.7, f));
+          color = mix(color, colorD, smoothstep(0.5, 1.0, f));
+
+          // Glossy effect for vibrancy
+          float gloss = pow(1.0 - abs(f - 0.5), 3.0);
+          color += vec3(1.0, 1.0, 1.0) * gloss * 0.2;
+
+          gl_FragColor = vec4(color, 1.0);
+        }
+
       `,
       transparent: true,
     });
@@ -108,7 +120,7 @@ const WaveEffect = ({ isDarkMode }) => {
     scene.add(mesh);
 
     const animate = (time) => {
-      uniforms.u_time.value = time * 0.0008;
+      uniforms.u_time.value = time * 0.001;
       renderer.render(scene, camera);
       animationFrameId.current = requestAnimationFrame(animate);
     };
@@ -134,34 +146,6 @@ const WaveEffect = ({ isDarkMode }) => {
     };
     // eslint-disable-next-line
   }, []);
-
-  // Update `isDarkModeRef` and animate transition
-  useEffect(() => {
-    if (materialRef.current) {
-      isDarkModeRef.current = isDarkMode; // Update ref without triggering re-render
-
-      const startValue = materialRef.current.uniforms.u_colorInvert.value;
-      const endValue = isDarkMode ? 0 : 1;
-      const duration = 1000;
-      const startTime = performance.now();
-
-      const animateTransition = (time) => {
-        const elapsed = time - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        materialRef.current.uniforms.u_colorInvert.value = THREE.MathUtils.lerp(
-          startValue,
-          endValue,
-          progress
-        );
-
-        if (progress < 1) {
-          transitionFrameId.current = requestAnimationFrame(animateTransition);
-        }
-      };
-
-      transitionFrameId.current = requestAnimationFrame(animateTransition);
-    }
-  }, [isDarkMode]);
 
   return (
     <canvas
