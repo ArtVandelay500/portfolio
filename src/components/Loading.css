@@ -1,7 +1,16 @@
+@font-face {
+  font-family: "ROEHOE-CHAN";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/ROEHOE-CHAN.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Loading Screen */
 .loading-screen {
   display: flex;
   justify-content: center;
+  font-family: "ROEHOE-CHAN";
   align-items: center;
   width: 100%;
   height: 100%;

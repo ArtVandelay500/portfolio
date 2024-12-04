@@ -18,15 +18,18 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <div className="app-container">
+    <div className="app-container animation_border">
       {isLoading ? (
         <div className="loading-screen">
-          <h1>Hyunwook Hong</h1>
+          <h1>홍현욱</h1>
         </div>
       ) : (
         <div className="main-content">
           <div className="blur-layer"></div>
-          <StaticLeft onSelect={setActiveSection} />
+          <StaticLeft
+            activeSection={activeSection}
+            onSelect={setActiveSection}
+          />
           <DynamicRight activeSection={activeSection} />
         </div>
       )}

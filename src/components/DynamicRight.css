@@ -1,6 +1,6 @@
 /* Dynamic Right Panel */
 .dynamic-right {
-  height: 90%; /* Ensure full height for scrolling */
+  height: 100%; /* Ensure full height for scrolling */
   width: 100%; /* Full width */
   overflow: hidden; /* Prevent scrollbars for the outer container */
   flex: 1; /* 50% width */
@@ -12,7 +12,6 @@
   box-sizing: border-box;
   opacity: 0; /* Default state */
   transition: opacity 0.5s ease-in-out; /* Smooth fade transition */
-  z-index: 1;
 }
 .dynamic-right.fade-in {
   opacity: 1; /* Fully visible */
@@ -22,13 +21,10 @@
   opacity: 0; /* Fully hidden */
 }
 #projects {
-  height: 95%; /* Full height to enable scrolling */
-  width: 100%;
+  position: relative;
   overflow-y: auto; /* Enable vertical scrolling */
-  padding: 10px;
   box-sizing: border-box;
   scrollbar-color: #888 #000; /* Optional: Custom scrollbar colors */
-  z-index: 1; /* Above the blur layer */
 }
 
 /* Optional: Scrollbar styling for WebKit browsers */
