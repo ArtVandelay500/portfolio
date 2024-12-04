@@ -1,0 +1,11 @@
+/* Static Left Panel */
+.static-left {
+  flex: 1; /* 50% width */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 1; /* Above the blur layer */
+}

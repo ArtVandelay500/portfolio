@@ -1,0 +1,29 @@
+/* General Page Styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Arial", sans-serif;
+  background-color: #000; /* Black background */
+  color: #fff; /* White text */
+  overflow: hidden; /* Prevent scrollbars */
+}
+/* Root Container */
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+/* App Container */
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
