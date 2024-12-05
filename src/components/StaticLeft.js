@@ -1,36 +1,58 @@
 import React from "react";
-import "./StaticLeft.css"; // Link to the styles below
+import "./StaticLeft.css";
 
-const StaticLeft = ({ onSelect }) => {
-  return (
-    // <FadeWrapper>
-    <div className="static-left">
-      <h1>
-        Hello, I am <span>John</span>
-      </h1>
-
-      <p>Short Bio or Branding Statement</p>
-      <nav>
+const StaticLeft = ({ activeSection, onSelect }) => {
+  const renderMenu = () => {
+    if (activeSection === "projects") {
+      return (
         <ul>
           <li>
-            <a href="#home" onClick={() => onSelect("home")}>
-              About
+            <a href="#project1" onClick={() => onSelect("project1")}>
+              Project 1
             </a>
           </li>
           <li>
-            <a href="#projects" onClick={() => onSelect("projects")}>
-              Projects
+            <a href="#project2" onClick={() => onSelect("project2")}>
+              Project 2
             </a>
           </li>
           <li>
-            <a href="#contact" onClick={() => onSelect("contact")}>
-              Contact
+            <a href="#project3" onClick={() => onSelect("project3")}>
+              Project 3
             </a>
           </li>
         </ul>
-      </nav>
+      );
+    }
+    // Default menu for other sections
+    return (
+      <ul>
+        <li>
+          <a href="#about" onClick={() => onSelect("about")}>
+            About
+          </a>
+        </li>
+        <li>
+          <a href="#projects" onClick={() => onSelect("projects")}>
+            Projects
+          </a>
+        </li>
+        <li>
+          <a href="#contact" onClick={() => onSelect("contact")}>
+            Contact
+          </a>
+        </li>
+      </ul>
+    );
+  };
+
+  return (
+    <div className="static-left">
+      <h1>
+        {activeSection === "projects" ? "Projects Directory" : "Navigation"}
+      </h1>
+      <nav>{renderMenu()}</nav>
     </div>
-    // </FadeWrapper>
   );
 };
 

@@ -7,5 +7,41 @@
   align-items: center;
   text-align: center;
   box-sizing: border-box;
-  z-index: 1; /* Above the blur layer */
+}
+ul {
+  display: flex;
+  flex-direction: row;
+  flex-direction: column;
+  list-style: none; /* Remove default bullets */
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  position: relative; /* Allow custom bullet positioning */
+  padding-right: 200px; /* Space for the custom bullet */
+  margin-bottom: 10px; /* Add spacing between list items */
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit; /* Use the parent color */
+  letter-spacing: -0.9px; /* Compact spacing by default */
+  transition: letter-spacing 0.3s ease, transform 0.3s ease; /* Smooth letter-spacing and position */
+}
+
+a:hover,
+a:focus {
+  letter-spacing: 1px; /* Widen spacing on hover */
+  color: #007bff; /* Optional: Change color on hover */
+}
+/* Active (clicked) state */
+a:active {
+  letter-spacing: 1px; /* Even wider letter spacing */
+  color: #0056b3; /* Optional: Darker color on click */
 }

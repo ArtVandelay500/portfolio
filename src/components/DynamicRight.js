@@ -26,7 +26,7 @@ const DynamicRight = ({ activeSection }) => {
       case "about":
         return <Home />;
       case "projects":
-        return <Projects className="scrollable-content" />;
+        return <Projects />;
       case "contact":
         return <Contact />;
       default:
