@@ -1,0 +1,12 @@
+/* Dynamic Right Panel */
+.right {
+  height: 100%; /* Ensure full height for scrolling */
+  width: 100%; /* Full width */
+  flex: 1; /* 50% width */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}

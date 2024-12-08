@@ -6,16 +6,4 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  opacity: 0; /* Hidden by default */
-  animation: fadeIn 1s ease-in-out forwards; /* Fade-in animation */
-}
-
-/* Fade-In Animation for Main Content */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }

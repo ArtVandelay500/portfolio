@@ -6,31 +6,43 @@
   font-style: normal;
 }
 
-/* Loading Screen */
+/* Fade-in and fade-out for the loading screen */
 .loading-screen {
-  display: flex;
-  justify-content: center;
-  font-family: "ROEHOE-CHAN";
-  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000; /* Black background */
-  color: #fff; /* White text */
-  animation: fadeInOut 2s ease-in-out; /* Fade in and out effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "ROEHOE-CHAN";
+  color: white;
+  background-color: black; /* Background for loading screen */
+  opacity: 0; /* Initially hidden */
+  animation: fadeIn 0.5s ease-in forwards;
 }
 
-/* Fade-In and Fade-Out Animation for Loading Screen */
-@keyframes fadeInOut {
-  0% {
+.loading-screen.fade-out {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
     opacity: 0;
   }
-  25% {
+  to {
     opacity: 1;
   }
-  75% {
+}
+
+/* Fade-out animation */
+@keyframes fadeOut {
+  from {
     opacity: 1;
   }
-  100% {
+  to {
     opacity: 0;
   }
 }
