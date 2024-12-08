@@ -7,6 +7,7 @@ const Left = ({
   selectedProject,
   onSectionSelect,
   onIndexSelect,
+  scrollToTop, // Function to scroll Right to the top
 }) => {
   // Apply transitions only when toggling between navigation and project index
   const { isVisible, currentProject, fadeOutDuration, fadeInDuration } =
@@ -44,10 +45,18 @@ const Left = ({
   );
 
   const renderProjectIndex = () => {
-    const projectSections = currentProject?.sections || [];
+    const projectSections = selectedProject?.sections || [];
     return (
       <ul className="project-index">
-        <h1>{currentProject?.name}</h1>
+        <h1
+          onClick={() => {
+            scrollToTop();
+          }}
+          className="clickable-title"
+        >
+          {currentProject?.name}
+        </h1>
+
         {projectSections.map((section, idx) => (
           <li
             key={idx}

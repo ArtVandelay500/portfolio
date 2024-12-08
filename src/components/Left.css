@@ -113,3 +113,14 @@ li.active {
   color: #0056b3;
   font-weight: bold;
 }
+.clickable-title {
+  z-index: 100;
+  cursor: pointer; /* Show pointer cursor on hover */
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.clickable-title:hover {
+  color: #007bff; /* Highlight color on hover */
+}

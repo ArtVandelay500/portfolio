@@ -17,19 +17,20 @@ const Right = ({
   selectedProject,
   selectedIndex,
   onProjectSelect,
+  rightRef,
 }) => {
   const projects = [
     {
       id: 1,
       name: "Project One",
-      sections: ProjectOneSections, // Dynamically imported sections
-      component: ProjectOne, // Component reference
+      sections: ProjectOneSections || [], // Fallback to empty array
+      component: ProjectOne,
     },
     {
       id: 2,
       name: "Project Two",
-      sections: ProjectTwoSections, // Dynamically imported sections
-      component: ProjectTwo, // Component reference
+      sections: ProjectTwoSections || [],
+      component: ProjectTwo,
     },
   ];
 
@@ -63,18 +64,22 @@ const Right = ({
       ))}
     </ul>
   );
-
   const renderProjectDetails = () => {
     if (!currentProject) return null;
 
-    // Dynamically render the selected project component
-    const ProjectComponent = currentProject.component;
+    const ProjectComponent = currentProject?.component;
+
+    if (!ProjectComponent || typeof ProjectComponent !== "function") {
+      console.error("Invalid Project Component:", ProjectComponent);
+      return <div>Error: Invalid Project Component</div>;
+    }
 
     return <ProjectComponent selectedIndex={selectedIndex} />;
   };
 
   return (
     <div
+      ref={rightRef} // Attach the ref to the container
       className={`right ${isVisible ? "fade-in" : "fade-out"}`}
       style={{
         "--fade-out-duration": `${fadeOutDuration}ms`,

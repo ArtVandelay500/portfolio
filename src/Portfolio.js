@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Left from "./components/Left";
 import Right from "./components/Right";
 import FadeTransitionWrapper from "./hooks/FadeTransitionWrapper";
@@ -21,7 +21,22 @@ const Portfolio = () => {
   };
 
   const handleIndexSelect = (index) => {
-    setSelectedIndex(index); // 프로젝트의 특정 인덱스 선택
+    setSelectedIndex(index);
+    if (selectedProject?.sections[index]) {
+      setActiveSection(selectedProject.sections[index].id); // Update activeSection
+    }
+  };
+
+  // Scroll-to-top function
+  const rightRef = useRef(null); // Reference for Right container
+  const scrollToTop = () => {
+    console.log("clicked!!!");
+    if (rightRef.current) {
+      rightRef.current.scrollTo({
+        top: 0,
+        behavior: "smooth", // Smooth scrolling
+      });
+    }
   };
 
   useEffect(() => {
@@ -62,12 +77,17 @@ const Portfolio = () => {
               onSectionSelect={setActiveSection}
               onProjectSelect={handleProjectSelect}
               onIndexSelect={handleIndexSelect}
+              scrollToTop={() => {
+                console.log("scrollToTop passed to Left.js");
+                scrollToTop();
+              }}
             />
             <Right
               activeSection={activeSection}
               selectedProject={selectedProject}
               selectedIndex={selectedIndex}
               onProjectSelect={handleProjectSelect}
+              rightRef={rightRef} // Pass the ref
             />
           </div>
         )}
