@@ -1,0 +1,50 @@
+/* Container for the project */
+.project-container {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+/* Header for the project */
+.project-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Individual section styling */
+.project-section {
+  padding: 20px;
+  margin-bottom: 40px; /* Space between sections */
+  transition: transform 0.3s ease; /* Smooth scaling on hover */
+}
+
+/* Section title */
+.project-section h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.project-section-title {
+  margin-bottom: 10px;
+  color: black;
+  font-size: 1.5rem;
+  transition: color 1.5s ease-in-out; /* Smooth color transition */
+}
+
+/* Highlight effect for selected h2 */
+.project-section-title.active {
+  color: #007bff; /* Highlight color */
+}
+/* Section content */
+.project-section p {
+  margin: 0;
+  color: #555; /* Dark gray text for content */
+  line-height: 1.6;
+}
+
+/* Active section styling */
+.project-section.active {
+  border-color: #007bff; /* Highlight border color */
+}
