@@ -1,12 +1,13 @@
 import React from "react";
 import { Element } from "react-scroll";
+import "../pages/Project.css";
 
 export const Project1Sections = ["overview", "features", "tech-stack"];
 
 const Project1 = () => {
   return (
     <div className="project-container">
-      <Element name="overview">
+      <Element className="project-content" name="overview">
         <h2>Overview</h2>
         <p>
           Ullamco proident excepteur culpa excepteur esse consequat sit proident
@@ -56,7 +57,7 @@ const Project1 = () => {
           ipsum sunt. Sit deserunt enim irure veniam.
         </p>
       </Element>
-      <Element name="features" id="features">
+      <Element className="project-content" name="features">
         <h2>Features</h2>
         <p>
           Ullamco proident excepteur culpa excepteur esse consequat sit proident
@@ -106,7 +107,7 @@ const Project1 = () => {
           ipsum sunt. Sit deserunt enim irure veniam.
         </p>
       </Element>
-      <Element name="tech-stack" id="tech-stack">
+      <Element className="project-content" name="tech-stack">
         <h2>Tech Stack</h2>
         <p>
           Ullamco proident excepteur culpa excepteur esse consequat sit proident

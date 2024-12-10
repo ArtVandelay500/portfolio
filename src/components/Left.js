@@ -7,9 +7,6 @@ const Left = ({ sections }) => {
   const location = useLocation();
   const isProjectDetail = location.pathname.startsWith("/projects/");
 
-  // Log the list of sections
-  console.log("Sections passed to Left.js:", sections);
-
   return (
     <div className="left">
       <h1>Hello</h1>
@@ -30,11 +27,10 @@ const Left = ({ sections }) => {
           sections.map((section) => (
             <li key={section}>
               <Link
-                to={section}
+                to={section} // Matches the name attribute in Element
                 smooth={true}
                 duration={500}
-                offset={-20}
-                onClick={() => console.log(`Clicked on ${section}`)}
+                offset={-20} // Adjust if needed
               >
                 {section}
               </Link>

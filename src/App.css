@@ -16,6 +16,7 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
+  display: flex;
   color: black; /* White text */
   overflow: hidden;
   font-size: 1.5em;
@@ -29,7 +30,6 @@ html {
 
 #root {
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +43,7 @@ html {
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   overflow: hidden;
   padding: 10px;
   background-color: rgba(0, 128, 0, 0.534);
