@@ -1,126 +1,24 @@
-/* Static Left Panel */
 .left {
-  flex: 1; /* 50% width */
+  flex: 1;
+  width: 100%;
+  height: 100;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-/* Header */
-.left h1 {
-  transition: letter-spacing 0.5s ease;
-}
-
-.left h1:hover {
-  letter-spacing: 1px; /* Widen spacing on hover */
-}
-
-/* Navigation and List Styling */
-ul {
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  list-style: none; /* Remove default bullets */
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  height: 2px;
-  position: relative;
-  display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 5px 0;
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: inherit; /* Use parent color */
-  letter-spacing: -0.9px; /* Compact spacing by default */
-  cursor: pointer;
-  transition: color 0.3s ease, letter-spacing 0.3s ease; /* Smooth effects */
+  background-color: rgba(255, 192, 203, 0.53);
 }
-
-li:hover {
-  letter-spacing: 1.1px; /* Widen spacing on hover */
-  color: #007bff; /* Optional: Change color on hover */
-}
-
-/* Active State */
-li.active {
-  letter-spacing: 1px; /* Widen spacing on hover */
-  color: #0056b3; /* Optional: Darker color on click */
-}
-
-.underline.show {
-  opacity: 1;
-}
-
-/* Underline Effect */
-.underline {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%); /* Shift back by half its width */
-  width: 45%;
-  height: 0.5px; /* Height of the underline */
-  background-image: linear-gradient(90deg, transparent 50%, #000 0),
-    linear-gradient(180deg, #000 50%, transparent 0);
-  background-position: 0 0, 0 100%;
-  background-repeat: repeat-x, repeat-y;
-  background-size: 30px 1px, 1px 30px;
-  animation: indexAnimation 0.7s infinite linear;
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* Animation Keyframes */
-@keyframes indexAnimation {
-  0% {
-    background-position: 0 0, 0 100%, 0 0, 100% 0;
-  }
-
-  100% {
-    background-position: 30px 0, -30px 100%, 0 -30px, 100% 30px;
-  }
-}
-/* Base Styles */
-.list {
+.left ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
-
-.list-item {
-  position: relative;
-  margin-bottom: 5px;
-  padding: 10px;
-  cursor: pointer;
-  text-align: center;
-  transition: color 0.3s ease, letter-spacing 0.3s ease;
+.left li {
+  margin: 5px 0;
 }
-
-/* Hover Effect */
-.list-item:hover {
-  letter-spacing: 1px;
-  color: #007bff;
-}
-
-/* Active State */
-.list-item.active {
-  color: #0056b3;
-  font-weight: bold;
-}
-.clickable-title {
-  z-index: 100;
-  cursor: pointer; /* Show pointer cursor on hover */
-  color: black;
+.left a {
   text-decoration: none;
-  transition: color 0.3s ease;
+  color: black;
 }
-
-.clickable-title:hover {
-  color: #007bff; /* Highlight color on hover */
+.left a.active {
+  font-weight: bold;
 }

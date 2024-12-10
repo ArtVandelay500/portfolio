@@ -1,93 +1,47 @@
 import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { Link } from "react-scroll"; // Use Link for smooth scrolling
 import "./Left.css";
-import useRightTransition from "../hooks/useTransition";
 
-const Left = ({
-  activeSection,
-  selectedProject,
-  onSectionSelect,
-  onIndexSelect,
-  scrollToTop, // Function to scroll Right to the top
-}) => {
-  // Apply transitions only when toggling between navigation and project index
-  const { isVisible, currentProject, fadeOutDuration, fadeInDuration } =
-    useRightTransition(
-      null, // Only track selectedProject for transitions
-      selectedProject
-    );
+const Left = ({ sections }) => {
+  const location = useLocation();
+  const isProjectDetail = location.pathname.startsWith("/projects/");
 
-  const sections = [
-    { id: "home", label: "Home" },
-    { id: "projects", label: "Projects" },
-    { id: "contact", label: "Contact" },
-  ];
-
-  const renderSections = () => (
-    <ul className="navigation">
-      <h1>Navigation</h1>
-      {sections.map((section) => (
-        <li
-          key={section.id}
-          className={`list-item ${
-            activeSection === section.id ? "active" : ""
-          }`}
-          onClick={() => onSectionSelect(section.id)}
-        >
-          {section.label}
-          <div
-            className={`underline ${
-              activeSection === section.id ? "show" : ""
-            }`}
-          />
-        </li>
-      ))}
-    </ul>
-  );
-
-  const renderProjectIndex = () => {
-    const projectSections = selectedProject?.sections || [];
-    return (
-      <ul className="project-index">
-        <h1
-          onClick={() => {
-            scrollToTop();
-          }}
-          className="clickable-title"
-        >
-          {currentProject?.name}
-        </h1>
-
-        {projectSections.map((section, idx) => (
-          <li
-            key={idx}
-            className={`project-index-item ${
-              activeSection === section.id ? "active" : ""
-            }`}
-            onClick={() => onIndexSelect(idx)}
-          >
-            {section.label}
-            <div
-              className={`underline ${
-                activeSection === section.id ? "show" : ""
-              }`}
-            />
-          </li>
-        ))}
-      </ul>
-    );
-  };
+  // Log the list of sections
+  console.log("Sections passed to Left.js:", sections);
 
   return (
-    <div
-      className={`right ${isVisible ? "fade-in" : "fade-out"}`}
-      style={{
-        "--fade-out-duration": `${fadeOutDuration}ms`,
-        //--fade-out-duration 이거는 css의 var 값 -> css의 var과 이름 같아야 매핑됨
-        //${fadeOutDuration}은 위에 useRightTransition 호출 값
-        "--fade-in-duration": `${fadeInDuration}ms`,
-      }}
-    >
-      {currentProject ? renderProjectIndex() : renderSections()}
+    <div className="left">
+      <h1>Hello</h1>
+      <ul>
+        {!isProjectDetail ? (
+          <>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/projects">Projects</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact">Contact</NavLink>
+            </li>
+          </>
+        ) : (
+          sections.map((section) => (
+            <li key={section}>
+              <Link
+                to={section}
+                smooth={true}
+                duration={500}
+                offset={-20}
+                onClick={() => console.log(`Clicked on ${section}`)}
+              >
+                {section}
+              </Link>
+            </li>
+          ))
+        )}
+      </ul>
     </div>
   );
 };

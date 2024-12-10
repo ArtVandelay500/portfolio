@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "Kuta";
+  src: url("./assets/fonts/KUTA.OTF") format("otf");
+  unicode-range: U+0020-007F; /* Basic Latin: Covers English letters, numbers, and punctuation */
+}
+@font-face {
+  font-family: "Chosunilbo_myungjo";
+  src: url("./assets/fonts/Chosunilbo_myungjo.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  unicode-range: U+AC00-D7AF; /* Korean Hangul Syllables */
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  color: black; /* White text */
+  overflow: hidden;
+  font-size: 1.5em;
+  font-family: "Chosunilbo_myungjo", "Kuta";
+  user-select: none; /* Prevent text selection */
+  -webkit-user-drag: none; /* Prevent dragging in WebKit browsers */
+  -moz-user-drag: none; /* Prevent dragging in Firefox */
+  -ms-user-drag: none; /* Prevent dragging in older IE versions */
+  cursor: default; /* Replace text select cursor with default cursor */
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  box-sizing: border-box;
+  background-color: rgba(255, 0, 0, 0.46);
+}
+
+.main-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px;
+  background-color: rgba(0, 128, 0, 0.534);
+}
