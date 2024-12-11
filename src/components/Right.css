@@ -12,3 +12,11 @@
 .right::-webkit-scrollbar {
   display: none;
 }
+
+.right ul {
+  list-style: none;
+  padding: 0;
+}
+.right li {
+  margin: 5px 0;
+}

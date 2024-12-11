@@ -9,3 +9,6 @@ ul {
 a {
   text-decoration: none;
 }
+a:visited {
+  color: inherit; /* Makes visited links the same color as unvisited links */
+}

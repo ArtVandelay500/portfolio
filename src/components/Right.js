@@ -6,11 +6,12 @@ const Right = ({ children, selectedSection }) => {
 
   useEffect(() => {
     if (selectedSection) {
-      const target = containerRef.current.querySelector(
-        `[name="${selectedSection}"]`
-      );
+      const target = containerRef.current.querySelector(`#${selectedSection}`); // Select the element with the matching ID
       if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
         console.log(`Scrolled to section: ${selectedSection}`);
       }
     }

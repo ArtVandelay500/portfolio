@@ -1,18 +1,24 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { Link } from "react-scroll"; // Use Link for smooth scrolling
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Left.css";
 
-const Left = ({ sections }) => {
+const Left = ({ selectedProject, onSelectSection }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const isProjectDetail = location.pathname.startsWith("/projects/");
+
+  const handleScrollToSection = (sectionId) => {
+    if (onSelectSection) {
+      onSelectSection(sectionId); // Notify App.js of the selected section
+    }
+  };
 
   return (
     <div className="left">
-      <h1>Hello</h1>
       <ul>
         {!isProjectDetail ? (
           <>
+            <h1>Navigation</h1>
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -24,18 +30,22 @@ const Left = ({ sections }) => {
             </li>
           </>
         ) : (
-          sections.map((section) => (
-            <li key={section}>
-              <Link
-                to={section} // Matches the name attribute in Element
-                smooth={true}
-                duration={500}
-                offset={-20} // Adjust if needed
+          <>
+            {/* Display the selected project's title */}
+            <h1>{selectedProject?.title || "Project Details"}</h1>
+            {selectedProject?.sections?.map((section) => (
+              <li
+                key={section}
+                onClick={() => handleScrollToSection(section)}
+                className="scroll-button"
               >
                 {section}
-              </Link>
+              </li>
+            ))}
+            <li onClick={() => navigate("/projects")} className="back-button">
+              Back to Projects
             </li>
-          ))
+          </>
         )}
       </ul>
     </div>

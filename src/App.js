@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./transitions.css"; // Global transition styles
 import Left from "./components/Left";
 import Right from "./components/Right";
 import Home from "./pages/Home";
@@ -11,24 +13,40 @@ import { Project1Sections } from "./pages/Project1";
 import { Project2Sections } from "./pages/Project2";
 
 const App = () => {
-  const [sections, setSections] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedSection, setSelectedSection] = useState(null);
 
-  const handleSelectProject = (projectId) => {
-    const sectionMap = {
-      project1: Project1Sections,
-      project2: Project2Sections,
+  const handleSelectProject = useCallback((projectId) => {
+    const projectMap = {
+      project1: { title: "Project 1", sections: Project1Sections },
+      project2: { title: "Project 2", sections: Project2Sections },
     };
-    setSections(sectionMap[projectId] || []);
-  };
+    setSelectedProject(projectMap[projectId] || null);
+  }, []);
+
+  const handleSelectSection = useCallback((section) => {
+    setSelectedSection(section);
+  }, []);
+
+  const handleGeneralPage = useCallback(() => {
+    setSelectedProject(null);
+    setSelectedSection(null);
+  }, []);
 
   return (
     <div className="main-content">
-      <Left sections={sections} />
-      <Right>
+      <Left
+        selectedProject={selectedProject}
+        onSelectSection={handleSelectSection}
+      />
+      <Right selectedSection={selectedSection}>
         <Routes>
           <Route path="*" element={<Navigate to="/" replace />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/" element={<Home onRender={handleGeneralPage} />} />
+          <Route
+            path="/projects"
+            element={<Projects onRender={handleGeneralPage} />}
+          />
           <Route
             path="/projects/:id"
             element={<ProjectDetails onSelectProject={handleSelectProject} />}

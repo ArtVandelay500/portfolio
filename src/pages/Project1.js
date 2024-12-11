@@ -1,5 +1,4 @@
 import React from "react";
-import { Element } from "react-scroll";
 import "../pages/Project.css";
 
 export const Project1Sections = ["overview", "features", "tech-stack"];
@@ -7,7 +6,7 @@ export const Project1Sections = ["overview", "features", "tech-stack"];
 const Project1 = () => {
   return (
     <div className="project-container">
-      <Element className="project-content" name="overview">
+      <div className="project-content" id="overview">
         <h2>Overview</h2>
         <p>
           Ullamco proident excepteur culpa excepteur esse consequat sit proident
@@ -56,8 +55,8 @@ const Project1 = () => {
           reprehenderit adipisicing do laborum ipsum ullamco ex nulla id magna
           ipsum sunt. Sit deserunt enim irure veniam.
         </p>
-      </Element>
-      <Element className="project-content" name="features">
+      </div>
+      <div className="project-content" id="features">
         <h2>Features</h2>
         <p>
           Ullamco proident excepteur culpa excepteur esse consequat sit proident
@@ -106,8 +105,8 @@ const Project1 = () => {
           reprehenderit adipisicing do laborum ipsum ullamco ex nulla id magna
           ipsum sunt. Sit deserunt enim irure veniam.
         </p>
-      </Element>
-      <Element className="project-content" name="tech-stack">
+      </div>
+      <div className="project-content" id="tech-stack">
         <h2>Tech Stack</h2>
         <p>
           Ullamco proident excepteur culpa excepteur esse consequat sit proident
@@ -156,7 +155,7 @@ const Project1 = () => {
           reprehenderit adipisicing do laborum ipsum ullamco ex nulla id magna
           ipsum sunt. Sit deserunt enim irure veniam.
         </p>
-      </Element>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,24 @@
+/* Fade Transition */
+.fade-enter {
+  opacity: 0;
+  display: flex;
+  flex: 1; /* Maintain layout */
+  height: 100%;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+  display: flex;
+  flex: 1; /* Maintain layout */
+  height: 100%;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
