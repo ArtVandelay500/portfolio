@@ -1,26 +1,14 @@
-@import url("//fonts.googleapis.com/earlyaccess/nanummyeongjo.css");
+@font-face {
+  font-family: "Kuta";
+  src: url("./assets/fonts/KUTA.OTF") format("otf");
+  unicode-range: U+0020-007F; /* Basic Latin: Covers English letters, numbers, and punctuation */
+}
 @font-face {
   font-family: "Chosunilbo_myungjo";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff")
-    format("woff");
+  src: url("./assets/fonts/ChosunNm.ttf") format("ttf");
   font-weight: normal;
   font-style: normal;
   unicode-range: U+AC00-D7AF; /* Korean Hangul Syllables */
-}
-/* 
-@font-face {
-  font-family: "D2Coding";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/D2Coding.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-  unicode-range: U+0020-007F;
-} */
-
-@font-face {
-  font-family: "Kuta";
-  src: url("/Users/biqui/Library/Fonts/Kuta.otf") format("otf");
-  unicode-range: U+0020-007F; /* Basic Latin: Covers English letters, numbers, and punctuation */
 }
 
 body {
